@@ -107,7 +107,7 @@ our.println("<!DOCTYPE html>
 
 **文档说明：servlet 容器使用的 servlet 配置对象，该对象在初始化期间将信息传递给 servlet。** 
 
-**一个Servlet对象对应一个Servlet对象，一百个Servlet对象就有一百个ServletConfig对象**
+**一个Servlet对象对应一个ServletConfig对象，一百个Servlet对象就有一百个ServletConfig对象**
 
 xml配置文件：
 
@@ -461,11 +461,7 @@ username=admin&password=*****
 - 传送数据**不是字符串**，必须用POST
 - **传送数据多，POST**
 - **请求是为了修改服务器资源，POST**
-- **其它都有GET**
-
-
-
-
+- **其它都用GET**
 
 
 
@@ -538,7 +534,7 @@ public class HttpServletTest extends GenericServlet {
 
 ## HttpServlet
 
-**对于以上的需求：前端页面发送请求方式应该和服务器端需要的请求方式一致，SUN公式提供了实现，即javax.servlet.http.HttpServlet 类**
+**对于以上的需求：前端页面发送请求方式应该和服务器端需要的请求方式一致，SUN公司提供了实现，即javax.servlet.http.HttpServlet 类**
 
 **部分源码：**
 
@@ -764,8 +760,7 @@ String contextPath = request.getContextPath();
 ```java
 String dname = request.getParameter("dname");
         System.out.println("原编码直接输出：部门名称：" + dname);
-        dname =
-                new String(request.getParameter("dname").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        dname = new String(request.getParameter("dname").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         System.out.println("UTF-8编码输出：部门名称：" + dname);
 // get请求
 // 原编码直接输出：部门名称：人事部
@@ -942,8 +937,6 @@ response.addCookie(cookie2);
 
 
 
-
-
 ### 将Cookie保存到本地文件之中
 
 默认情况下，没有设置Cookie的有效时长，该Cookie被默认保存在浏览器的缓存当中，只要浏览器不关闭Cookie存在，只要关闭浏览器Cookie消失，我们可以通过设置Cookie的有效时长，以保证Cookie保存在硬盘文件当中。但是这个有效时长必须是>0的。换句话说，只要设置Cookie的有效时长大于0，则该Cookie会被保存在客户端硬盘文件当中。有效时长过去之后，则硬盘文件当中的Cookie失效。
@@ -952,10 +945,6 @@ response.addCookie(cookie2);
               cookie有效时长 > 0 存储在硬盘文件当中
 
 ​				cookie.setMaxAge(60 * 60);  1小时有效，参数是秒为单位的
-
-
-
-
 
 
 
@@ -994,7 +983,7 @@ if(cookies != null){
 
 ### 路径的编写形式
 
-- \<a href="/项目名/资源路径"></a>
+- \<a href="/项目名/资源路径">\</a>
 
 - 项目名通常使用request.getContextPath()获取
 
@@ -1005,19 +994,19 @@ if(cookies != null){
 - 转发：request.getRequestDispatcher("/资源路径").forward(request,response);
 
 - 欢迎页面
-	<welcome-file-list>
-		<welcome-file>资源路径</welcome-file>
-	</welcome-file-list>
+	\<welcome-file-list>
+		\<welcome-file>资源路径\</welcome-file>
+	\</welcome-file-list>
 	
 - servlet路径
-	<servlet>
-		<servlet-name>hello</servlet-name>
-		<servlet-class>com.bjpowernode.javaweb.servlet.HelloServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>hello</servlet-name>
-		<url-pattern>/资源路径</url-pattern>
-	</servlet-mapping>
+	\<servlet>
+		\<servlet-name>hello\</servlet-name>
+		\<servlet-class>com.bjpowernode.javaweb.servlet.HelloServlet\</servlet-class>
+	\</servlet>
+	\<servlet-mapping>
+		\<servlet-name>hello\</servlet-name>
+		\<url-pattern>/资源路径\</url-pattern>
+	\</servlet-mapping>
 	
 - Cookie设置path
 	cookie.setPath("/项目名/资源路径");
@@ -1034,16 +1023,16 @@ if(cookies != null){
 ### url-pattern的编写方式
 
 url-pattern可以编写多个
-精确匹配
-<url-pattern>/hello</url-pattern>
-<url-pattern>/system/hello</url-pattern>
-扩展匹配
-<url-pattern>/abc/*</url-pattern>
-后缀匹配
-<url-pattern>*.action</url-pattern>
-<url-pattern>*.do</url-pattern>
-全部匹配
-<url-pattern>/*</url-pattern>
+**精确匹配**
+**\<url-pattern>/hello\</url-pattern>**
+**\<url-pattern>/system/hello\</url-pattern>**
+**扩展匹配**
+**\<url-pattern>/abc/\*\</url-pattern>**
+**后缀匹配**
+**\<url-pattern>\*.action\</url-pattern>**
+**\<url-pattern>\*.do\</url-pattern>**
+**全部匹配**
+**\<url-pattern>/*\</url-pattern>**
 
 
 
